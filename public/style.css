@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    background: rgb(212, 245, 253);
+  }
+
+  .header {
+    background: rgb(60, 255, 40);
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
+      0 0 1rem rgba(0, 0, 0, 0.2);
+    color: white;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  #hline {
+    left: 3%;
+    padding-left: 5%;
+    color: rgb(255, 255, 255);
+    font-size: xx-large;
+    font-weight: bold;
+  }
+  
+  #ty{
+    width: 70%;
+    border-radius: 30px;
+    position: relative;
+    text-align: center;
+    left: 15%;
+  }
+
+  #set {
+    position: absolute;
+    right: 5%;
+    border: none;
+    padding: 3px;
+    transition: transform 0.3s;
+  }
+
+  #set:active {
+    transform: rotate(45deg);
+  }
+
+  .zoom {
+    transform: scale(1.1);
+    transition: transform 0.1s;
+  }
+
+  .zoom:active {
+    transform: scale(0.9);
+  }
+
+  #typingarea {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    background: rgb(60, 255, 40);
+    bottom: 0;
+    width: 100%;
+    padding: 5px;
+  }
+
+  #typingbox {
+    display: flex;
+    flex-grow: 2;
+    font-size: x-large;
+    resize: none;
+    outline: none;
+    border: none;
+  }
+
+  #bt {
+    display: flex;
+    flex-grow: 0.4;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    padding: 10px 20px;
+    background-color: rgb(60, 255, 40);
+  }
+
+  .filese {
+    padding: 10px 20px;
+  }
+
+  .mdisplay {
+    height: 78%;
+    padding: 20px 0 0 0;
+    overflow: auto;
+    position: fixed;
+    width: 100%;
+  }
+
+  .message {
+    max-width: 90%;
+    font-size: large;
+    padding: 10px 20px;
+    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
+      0 0 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  .mymessage {
+    float: right;
+    margin-right: 10px;
+    border-radius: 30px 30px 0 30px;
+    overflow: auto;
+  }
+
+  .omessage {
+    float: left;
+    margin-left: 10px;
+    background: white;
+    border-radius: 30px 30px 30px 0;
+    overflow: auto;
+  }
+
+  .separator {
+    width: 100%;
+    height: 8px;
+    float: left;
+  }

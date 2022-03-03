@@ -3,131 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="keywords" content="chat">
-    <meta name="description" content="chat and share photo with friends online">
-    <meta name="author" content="mayank kushwaha">
+    <meta name="keywords" content="chat" />
+    <meta
+      name="description"
+      content="chat and share photo with friends online"
+    />
+    <meta name="author" content="mayank kushwaha" />
     <meta http-equiv="cache-control" content="no-cache" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CHAT</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        background: rgb(212, 245, 253);
-      }
-
-      .header {
-        background: rgb(60, 255, 40);
-        box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
-          0 0 1rem rgba(0, 0, 0, 0.2);
-        color: white;
-        width: 100%;
-        padding-top: 5px;
-        padding-bottom: 5px;
-      }
-
-      #hline {
-        left: 3%;
-        padding-left: 5%;
-        color: rgb(255, 255, 255);
-        font-size: xx-large;
-        font-weight: bold;
-      }
-
-      #set {
-        position: absolute;
-        right: 5%;
-        border: none;
-        padding: 3px;
-        transition: transform 0.3s;
-      }
-
-      #set:active {
-        transform: rotate(45deg);
-      }
-
-      .zoom {
-        transform: scale(1.1);
-        transition: transform 0.1s;
-      }
-
-      .zoom:active {
-        transform: scale(0.9);
-      }
-
-      #typingarea {
-        display: flex;
-        flex-direction: row;
-        position: fixed;
-        background: rgb(60, 255, 40);
-        bottom: 0;
-        width: 100%;
-        padding: 5px;
-      }
-
-      #typingbox {
-        display: flex;
-        flex-grow: 2;
-        font-size: x-large;
-        resize: none;
-        outline: none;
-        border: none;
-      }
-
-      #bt {
-        display: flex;
-        flex-grow: 0.4;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        padding: 10px 20px;
-        background-color: rgb(60, 255, 40);
-      }
-
-      .filese {
-        padding: 10px 20px;
-      }
-
-      .mdisplay {
-        height: 78%;
-        padding: 20px 0 0 0;
-        overflow: auto;
-        position: fixed;
-        width: 100%;
-      }
-
-      .message {
-        max-width: 90%;
-        font-size: large;
-        padding: 10px 20px;
-        box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
-          0 0 1rem rgba(0, 0, 0, 0.2);
-      }
-
-      .mymessage {
-        float: right;
-        margin-right: 10px;
-        border-radius: 30px 30px 0 30px;
-        overflow: auto;
-      }
-
-      .omessage {
-        float: left;
-        margin-left: 10px;
-        background: white;
-        border-radius: 30px 30px 30px 0;
-        overflow: auto;
-      }
-
-      .separator {
-        width: 100%;
-        height: 8px;
-        float: left;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -139,17 +24,7 @@
       <div id="mainmess"></div>
       <div id="tydis">
         <div class="separator"></div>
-        <div
-          class="omessage"
-          id="ty"
-          style="
-            width: 70%;
-            border-radius: 30px;
-            position: relative;
-            text-align: center;
-            left: 15%;
-          "
-        ></div>
+        <div class="omessage" id="ty"></div>
       </div>
     </div>
 
@@ -175,178 +50,14 @@
       </button>
     </div>
 
-    <script type="text/javascript" src="/scripts/socket.io/client-dist/socket.io.min.js"></script>
-    <script type="text/javascript" src="/scripts/browser-image-compression/dist/browser-image-compression.js"></script>
-    <script>
-      var name = "null";
-      if (localStorage.getItem("Name") === null) {
-        setname();
-      }
-      name = localStorage.getItem("Name");
-      var socket;
-      var curl;
-      var recidata;
-      var ssss = document.getElementById("mdisplay");
-      window.onload = function () {
-        socket = io.connect("https://milo-chat.herokuapp.com");
-        // socket = io.connect("http://localhost:3000");
-        socket.on("recive_message", function (msg) {
-        //   console.log(msg);
-          var html =
-            '<div><div class="message omessage">' +
-            msg +
-            '</div><div class="separator"></div></div>';
-          var sss = document.getElementById("mainmess");
-          sss.innerHTML += html;
-          ssss.scrollTop = ssss.scrollHeight;
-        });
-
-        socket.on("base64", function (msgdata) {
-          var html =
-            '<div><div class="message omessage"><h4>' +
-            msgdata.uname +
-            '</h4><img src="' +
-            msgdata.file +
-            '" style="max-width: 100%;object-fit:cover;height:250px;"/></div><div class="separator"></div></div>';
-          var sss = document.getElementById("mainmess");
-          sss.innerHTML += html;
-          ssss.scrollTop = ssss.scrollHeight;
-        });
-
-        socket.on("display", function (data) {
-          if (name != data.user) {
-            if (data.typing == true) {
-              document.getElementById("ty").innerText =
-                data.user + ": Typing...";
-              ssss.scrollTop = ssss.scrollHeight;
-            } else {
-              document.getElementById("ty").innerHTML = "";
-            }
-          }
-        });
-      };
-
-      function sendMessage() {
-        if (name != "null") {
-          typingTimeout();
-          var message = document.getElementById("typingbox").value;
-          var html =
-            '<div><div class="message mymessage">' +
-            message +
-            '</div><div class="separator"></div></div>';
-        //   console.log(message);
-          if (message == "") {
-            // console.log("no message send");
-          } else {
-            document.getElementById("typingbox").value = "";
-            var sss = document.getElementById("mainmess");
-            sss.innerHTML += html;
-            ssss.scrollTop = ssss.scrollHeight;
-            socket.emit("transmit_message", name + ": " + message);
-          }
-        } else setname();
-      }
-
-      var input = document.getElementById("typingbox");
-      input.addEventListener("keydown", function (event) {
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          document.getElementById("bt").click();
-        }
-      });
-
-      function typingTimeout() {
-        typing = false;
-        socket.emit("typing", { user: name, typing: false });
-      }
-      var timeout;
-      function keydown(e) {
-        var keynum;
-        if (window.event) {
-          keynum = e.keyCode;
-        } else if (e.which) {
-          keynum = e.which;
-        }
-        if (keynum) {
-          typing = true;
-          socket.emit("typing", { user: name, typing: true });
-          clearTimeout(timeout);
-          timeout = setTimeout(typingTimeout, 2000);
-        } else {
-          clearTimeout(timeout);
-          typingTimeout();
-        }
-      }
-      function setname() {
-        if (name != "null") {
-          let stat = confirm(
-            "You current user name is " + name + ", DO YOU WANT TO CHANGE IT ?"
-          );
-          if (stat == false) {
-            return;
-          }
-        }
-        let inname = prompt("Type your name here");
-        if (inname == "") {
-          alert("Pls enter name!!!");
-          setname();
-        } else {
-          localStorage.setItem("Name", inname);
-          name = localStorage.getItem("Name");
-        }
-      }
-
-      function filesend(fname) {
-        var msgdata = {};
-        var parts = fname.split(".");
-        fname = parts[parts.length - 1].toLowerCase();
-        const data = document.getElementById("sfile").files[0];
-        var imagesenddata;
-        async function handleImageUpload() {
-          const options = {
-            maxSizeMB: 0.1,
-            maxWidthOrHeight: 1080,
-            useWebWorker: true,
-          };
-          try {
-            const compressedFile = await imageCompression(data, options);
-            var copratio = (1 - compressedFile.size / data.size) * 100;
-            imagesenddata = compressedFile;
-          } catch (error) {
-            console.log(error);
-          }
-
-          var reader = new FileReader();
-          msgdata.uname = name;
-          reader.onloadend = function () {
-            msgdata.file = reader.result;
-            if (
-              fname == "jpg" ||
-              fname == "jpeg" ||
-              fname == "ico" ||
-              fname == "gif" ||
-              fname == "png"
-            ) {
-              var html =
-                '<div><div class="message mymessage"><h4>' +
-                msgdata.uname +
-                '</h4><br><img src="' +
-                msgdata.file +
-                '" style="max-width: 100%;object-fit:cover;height:250px;"/><br><h5>' +
-                Math.round(copratio) +
-                '% compressed</h5></div><div class="separator"></div></div>';
-              var sss = document.getElementById("mainmess");
-              sss.innerHTML += html;
-              ssss.scrollTop = ssss.scrollHeight;
-              socket.emit("base64", msgdata);
-            } else {
-              alert("file not supported!!!");
-            }
-          };
-          reader.readAsDataURL(imagesenddata);
-        }
-        handleImageUpload();
-      }
-    </script>
+    <script
+      type="text/javascript"
+      src="/scripts/socket.io/client-dist/socket.io.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/scripts/browser-image-compression/dist/browser-image-compression.js"
+    ></script>
+    <script src="script.js"></script>
   </body>
 </html>
