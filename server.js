@@ -12,6 +12,7 @@ var io = require("socket.io")(http,{
 
 var server_port = process.env.PORT || 3000;
 const onchat = [];
+var onpd;
 
 app.use(express.static(__dirname + "/public"));
 app.use('/scripts', express.static(__dirname + '/node_modules/'));
@@ -20,11 +21,15 @@ app.get("/", function (req, res) {res.sendFile(__dirname + "/chat.html");});
 io.on("connection", function (socket) {
   console.log(socket.id + " Online!!!");
   onchat.push(socket.id);
+  onpd = onchat.length;
+  io.emit("onp", onpd);
 
   socket.on("disconnect", function () {
     console.log(socket.id + " Disconnected!!!");
     var userid = onchat.indexOf(socket.id);
     onchat.splice(userid, 1);
+    onpd = onchat.length;
+    io.emit("onp", onpd);
   });
 
   socket.on("connect_error", (err) => {
