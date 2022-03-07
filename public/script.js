@@ -54,10 +54,7 @@ function sendMessage() {
       '<div><div class="message mymessage">' +
       message +
       '</div><div class="separator"></div></div>';
-  //   console.log(message);
-    if (message == "") {
-      // console.log("no message send");
-    } else {
+    if (message != "") {
       document.getElementById("typingbox").value = "";
       var sss = document.getElementById("mainmess");
       sss.innerHTML += html;
