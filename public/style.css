@@ -19,10 +19,14 @@
 
   #hline {
     left: 3%;
-    padding-left: 5%;
+    margin-left: 5%;
     color: rgb(255, 255, 255);
     font-size: xx-large;
     font-weight: bold;
+    cursor: pointer;
+  }
+  #op, img{
+    cursor: pointer;
   }
   
   #ty{
