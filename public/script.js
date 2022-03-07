@@ -50,11 +50,11 @@ function sendMessage() {
   if (name != "null") {
     typingTimeout();
     var message = document.getElementById("typingbox").value;
-    var html =
+    if (message != "") {
+      var html =
       '<div><div class="message mymessage">' +
       message +
       '</div><div class="separator"></div></div>';
-    if (message != "") {
       document.getElementById("typingbox").value = "";
       var sss = document.getElementById("mainmess");
       sss.innerHTML += html;
