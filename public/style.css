@@ -1,129 +1,140 @@
 * {
-    margin: 0;
-    padding: 0;
-  }
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-  body {
-    background: rgb(212, 245, 253);
-  }
+      :root {
+        --bar: #6127ad;
+        --background: #25292b;
+      }
 
-  .header {
-    background: rgb(60, 255, 40);
-    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
-      0 0 1rem rgba(0, 0, 0, 0.2);
-    color: white;
-    width: 100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
+      body {
+        background: var(--background);
+      }
 
-  #hline {
-    left: 3%;
-    margin-left: 5%;
-    color: rgb(255, 255, 255);
-    font-size: xx-large;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  #op, img{
-    cursor: pointer;
-  }
-  
-  #ty{
-    width: 70%;
-    border-radius: 30px;
-    position: relative;
-    text-align: center;
-    left: 15%;
-  }
+      .header {
+        background: var(--bar);
+        box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
+          0 0 1rem rgba(0, 0, 0, 0.2);
+        color: white;
+        width: 100%;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
 
-  #set {
-    position: absolute;
-    right: 5%;
-    border: none;
-    padding: 3px;
-    transition: transform 0.3s;
-  }
+      #hline {
+        left: 3%;
+        margin-left: 5%;
+        color: rgb(255, 255, 255);
+        font-size: xx-large;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      #op,
+      img {
+        cursor: pointer;
+      }
 
-  #set:active {
-    transform: rotate(45deg);
-  }
+      #ty {
+        width: 70%;
+        border-radius: 30px;
+        position: relative;
+        text-align: center;
+        left: 15%;
+      }
 
-  .zoom {
-    transform: scale(1.1);
-    transition: transform 0.1s;
-  }
+      #set {
+        position: absolute;
+        right: 5%;
+        border: none;
+        padding: 3px;
+        transition: transform 0.3s;
+      }
 
-  .zoom:active {
-    transform: scale(0.9);
-  }
+      #set:active {
+        transform: rotate(45deg);
+      }
 
-  #typingarea {
-    display: flex;
-    flex-direction: row;
-    position: fixed;
-    background: rgb(60, 255, 40);
-    bottom: 0;
-    width: 100%;
-    padding: 5px;
-  }
+      .zoom {
+        transform: scale(1.1);
+        transition: transform 0.1s;
+      }
 
-  #typingbox {
-    display: flex;
-    flex-grow: 2;
-    font-size: x-large;
-    resize: none;
-    outline: none;
-    border: none;
-  }
+      .zoom:active {
+        transform: scale(0.9);
+      }
 
-  #bt {
-    display: flex;
-    flex-grow: 0.4;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    padding: 10px 20px;
-    background-color: rgb(60, 255, 40);
-  }
+      #typingarea {
+        display: flex;
+        flex-direction: row;
+        position: fixed;
+        background: var(--bar);
+        bottom: 0;
+        width: 100%;
+        padding: 5px;
+      }
 
-  .filese {
-    padding: 10px 20px;
-  }
+      #typingbox {
+        display: flex;
+        flex-grow: 2;
+        font-size: large;
+        resize: none;
+        outline: none;
+        border: none;
+        color: white;
+        background-color: var(--background);
+      }
 
-  .mdisplay {
-    height: 78%;
-    padding: 20px 0 0 0;
-    overflow: auto;
-    position: fixed;
-    width: 100%;
-  }
+      #bt {
+        display: flex;
+        flex-grow: 0.4;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        padding: 10px 20px;
+        background-color: var(--bar);
+      }
 
-  .message {
-    max-width: 90%;
-    font-size: large;
-    padding: 10px 20px;
-    box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
-      0 0 1rem rgba(0, 0, 0, 0.2);
-  }
+      .filese {
+        padding: 10px 20px;
+      }
 
-  .mymessage {
-    float: right;
-    margin-right: 10px;
-    border-radius: 30px 30px 0 30px;
-    overflow: auto;
-  }
+      .mdisplay {
+        height: 78%;
+        padding: 20px 0 0 0;
+        overflow: auto;
+        position: fixed;
+        width: 100%;
+      }
 
-  .omessage {
-    float: left;
-    margin-left: 10px;
-    background: white;
-    border-radius: 30px 30px 30px 0;
-    overflow: auto;
-  }
+      .message {
+        max-width: 90%;
+        font-size: large;
+        padding: 10px 20px;
+        box-shadow: 0 0.25rem 0.25rem rgba(0, 0, 0, 0.2),
+          0 0 1rem rgba(0, 0, 0, 0.2);
+      }
 
-  .separator {
-    width: 100%;
-    height: 8px;
-    float: left;
-  }
+      .mymessage {
+        float: right;
+        margin-right: 10px;
+        border-radius: 30px 30px 0 30px;
+        overflow: auto;
+        background-color: var(--bar);
+        color: white;
+      }
+
+      .omessage {
+        float: left;
+        margin-left: 10px;
+        background: white;
+        border-radius: 30px 30px 30px 0;
+        overflow: auto;
+      }
+
+      .separator {
+        width: 100%;
+        height: 8px;
+        float: left;
+      }
