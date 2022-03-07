@@ -44,6 +44,10 @@ window.onload = function () {
       }
     }
   });
+  socket.on("onp",function(onpd){
+        console.log(onpd);
+        document.getElementById("op").innerText=onpd;
+      });
 };
 
 function sendMessage() {
