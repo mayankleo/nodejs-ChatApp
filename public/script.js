@@ -1,17 +1,16 @@
-var name = "null";
+var uname = "null";
 if (localStorage.getItem("Name") === null) {
   setname();
 }
-name = localStorage.getItem("Name");
+uname = localStorage.getItem("Name");
 var socket;
 var curl;
 var recidata;
 var ssss = document.getElementById("mdisplay");
 window.onload = function () {
-  socket = io.connect("https://milo-chat.herokuapp.com");
-  // socket = io.connect("http://localhost:3000");
+//   socket = io.connect("https://milo-chat.herokuapp.com");
+  socket = io.connect("http://localhost:3000");
   socket.on("recive_message", function (msg) {
-  //   console.log(msg);
     var html =
       '<div><div class="message omessage">' +
       msg +
@@ -34,7 +33,7 @@ window.onload = function () {
   });
 
   socket.on("display", function (data) {
-    if (name != data.user) {
+    if (uname != data.user) {
       if (data.typing == true) {
         document.getElementById("ty").innerText =
           data.user + ": Typing...";
@@ -51,7 +50,7 @@ window.onload = function () {
 };
 
 function sendMessage() {
-  if (name != "null") {
+  if (uname != "null") {
     typingTimeout();
     var message = document.getElementById("typingbox").value;
     if (message != "") {
@@ -63,14 +62,14 @@ function sendMessage() {
       var sss = document.getElementById("mainmess");
       sss.innerHTML += html;
       ssss.scrollTop = ssss.scrollHeight;
-      socket.emit("transmit_message", name + ": " + message);
+      socket.emit("transmit_message", uname + ": " + message);
     }
   } else setname();
 }
 
 var input = document.getElementById("typingbox");
 input.addEventListener("keydown", function (event) {
-  if (event.keyCode === 13) {
+  if (event.key === 'Enter') {
     event.preventDefault();
     document.getElementById("bt").click();
   }
@@ -78,7 +77,7 @@ input.addEventListener("keydown", function (event) {
 
 function typingTimeout() {
   typing = false;
-  socket.emit("typing", { user: name, typing: false });
+  socket.emit("typing", { user: uname, typing: false });
 }
 var timeout;
 function keydown(e) {
@@ -90,7 +89,7 @@ function keydown(e) {
   }
   if (keynum) {
     typing = true;
-    socket.emit("typing", { user: name, typing: true });
+    socket.emit("typing", { user: uname, typing: true });
     clearTimeout(timeout);
     timeout = setTimeout(typingTimeout, 2000);
   } else {
@@ -99,9 +98,9 @@ function keydown(e) {
   }
 }
 function setname() {
-  if (name != "null") {
+  if (uname != "null") {
     let stat = confirm(
-      "You current user name is " + name + ", DO YOU WANT TO CHANGE IT ?"
+      "You current user name is " + uname + ", DO YOU WANT TO CHANGE IT ?"
     );
     if (stat == false) {
       return;
@@ -113,7 +112,7 @@ function setname() {
     setname();
   } else {
     localStorage.setItem("Name", inname);
-    name = localStorage.getItem("Name");
+    uname = localStorage.getItem("Name");
   }
 }
 
@@ -138,7 +137,7 @@ function filesend(fname) {
     }
 
     var reader = new FileReader();
-    msgdata.uname = name;
+    msgdata.uname = uname;
     reader.onloadend = function () {
       msgdata.file = reader.result;
       if (
