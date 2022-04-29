@@ -1,13 +1,13 @@
 {
   "name": "init",
   "version": "1.0.0",
-  "description": "",
+  "description": "chat app",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "",
+  "author": "mayank kushwaha",
   "license": "ISC",
   "dependencies": {
     "browser-image-compression": "^1.0.17",
