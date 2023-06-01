@@ -9,8 +9,8 @@ var curl;
 var recidata;
 var ssss = document.getElementById("mdisplay");
 window.onload = function () {
-//   socket = io.connect("https://milo-chat.herokuapp.com");
-  socket = io.connect("http://localhost:3000");
+  socket = io.connect("https://milo-chat.onrender.com");
+ // socket = io.connect("http://localhost:3000");
   socket.on("recive_message", function (msg) {
     var html =
       '<div><div class="message omessage">' +
